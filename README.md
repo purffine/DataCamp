@@ -1,1 +1,46 @@
-# DataCamp
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "25f36de1-def4-4b63-9b54-af570cd09f21",
+   "metadata": {},
+   "source": [
+    "# Practical Exam: House Sales\n",
+    "\n",
+    "## Introduction\n",
+    "\n",
+    "RealAgents, a real estate company, aims to optimize house listing prices to minimize time to sale. We'll use a dataset of previous house sales to predict sale prices based on house characteristics.\n",
+    "\n",
+    "## Data\n",
+    "\n",
+    "The dataset (house_sales.csv) includes the following columns:\n",
+    "\n",
+    "| Column Name | Criteria                                                |\n",
+    "|-------------|---------------------------------------------------------|\n",
+    "| house_id    | Nominal. Unique identifier for houses. Missing values not possible. |\n",
+    "| city        | Nominal. The city in which the house is located (one of 'Silvertown', 'Riverford', 'Teasdale', 'Poppleton'). Replace missing values with \"Unknown\". |\n",
+    "| sale_price  | Discrete. The sale price of the house in whole dollars. Remove missing entries. |\n",
+    "| sale_date   | Discrete. The date of the last sale of the house. Replace missing values with 2023-01-01. |\n",
+    "| months_listed  | Continuous. The number of months the house was listed prior to its last sale, rounded to one decimal place. Replace missing values with the mean. |\n",
+    "| bedrooms    | Discrete. The number of bedrooms. Replace missing values with the mean, rounded to the nearest integer. |\n",
+    "| house_type   | Ordinal. One of \"Terraced\", \"Semi-detached\", or \"Detached\". Replace missing values with the most common type. |\n",
+    "| area      | Continuous. The area in square meters, rounded to one decimal place. Replace missing values with the mean. |\n",
+    "\n",
+    "## Tasks \n",
+    "\n",
+    "We will complete the following tasks:\n",
+    "\n",
+    "1. **Identify Missing 'city' Values:** Calculate the number of missing values in the `city` column.\n",
+    "2. **Data Cleaning and Preprocessing:** Prepare the data for modeling.\n",
+    "3. **Average Sale Price by Bedrooms:**  Calculate the average and variance of sale price for each number of bedrooms. \n",
+    "4. **Baseline Model:** Fit a linear regression model to predict sale price. \n",
+    "5. **Comparison Model:** Fit a decision tree model for comparison."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "f14c7f02-e39b-4292-966f-c58316920ef8",
+   "metadata": {},
+   "outputs": [],
+   "source": [
