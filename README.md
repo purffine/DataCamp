@@ -1,46 +1,65 @@
-{
- "cells": [
-  {
-   "cell_type": "markdown",
-   "id": "25f36de1-def4-4b63-9b54-af570cd09f21",
-   "metadata": {},
-   "source": [
-    "# Practical Exam: House Sales\n",
-    "\n",
-    "## Introduction\n",
-    "\n",
-    "RealAgents, a real estate company, aims to optimize house listing prices to minimize time to sale. We'll use a dataset of previous house sales to predict sale prices based on house characteristics.\n",
-    "\n",
-    "## Data\n",
-    "\n",
-    "The dataset (house_sales.csv) includes the following columns:\n",
-    "\n",
-    "| Column Name | Criteria                                                |\n",
-    "|-------------|---------------------------------------------------------|\n",
-    "| house_id    | Nominal. Unique identifier for houses. Missing values not possible. |\n",
-    "| city        | Nominal. The city in which the house is located (one of 'Silvertown', 'Riverford', 'Teasdale', 'Poppleton'). Replace missing values with \"Unknown\". |\n",
-    "| sale_price  | Discrete. The sale price of the house in whole dollars. Remove missing entries. |\n",
-    "| sale_date   | Discrete. The date of the last sale of the house. Replace missing values with 2023-01-01. |\n",
-    "| months_listed  | Continuous. The number of months the house was listed prior to its last sale, rounded to one decimal place. Replace missing values with the mean. |\n",
-    "| bedrooms    | Discrete. The number of bedrooms. Replace missing values with the mean, rounded to the nearest integer. |\n",
-    "| house_type   | Ordinal. One of \"Terraced\", \"Semi-detached\", or \"Detached\". Replace missing values with the most common type. |\n",
-    "| area      | Continuous. The area in square meters, rounded to one decimal place. Replace missing values with the mean. |\n",
-    "\n",
-    "## Tasks \n",
-    "\n",
-    "We will complete the following tasks:\n",
-    "\n",
-    "1. **Identify Missing 'city' Values:** Calculate the number of missing values in the `city` column.\n",
-    "2. **Data Cleaning and Preprocessing:** Prepare the data for modeling.\n",
-    "3. **Average Sale Price by Bedrooms:**  Calculate the average and variance of sale price for each number of bedrooms. \n",
-    "4. **Baseline Model:** Fit a linear regression model to predict sale price. \n",
-    "5. **Comparison Model:** Fit a decision tree model for comparison."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 2,
-   "id": "f14c7f02-e39b-4292-966f-c58316920ef8",
-   "metadata": {},
-   "outputs": [],
-   "source": [
+# House Price Prediction
+
+## Project Overview
+
+This project aims to build models for predicting house sale prices based on a dataset of house features. Two different models are developed and compared:
+
+* **Model 1:**  Linear Regression using a subset of numerical features.
+* **Model 2:**  Decision Tree Regressor using all available features with one-hot encoding for categorical variables.
+
+## Data
+
+The project uses a dataset named `house_sales.csv` provided by DataCamp that recorded the real estate data from RealAgents at specific year. The data contains the following features:
+
+- `house_id`: Unique identifier for each house
+- `city`: City where the house is located
+- `sale_date`: Date of the sale
+- `sale_price`: Sale price of the house (target variable)
+- `bedrooms`: Number of bedrooms
+- `area`: Area of the house in square meters
+- `months_listed`: Number of months the house was listed before selling
+- `house_type`: Type of house (e.g., Detached, Semi-detached, Terraced)
+
+## Data Cleaning and Preprocessing
+
+The `clean_data()` function performs the following cleaning and preprocessing steps:
+
+- Handles missing values:
+    - Replaces missing `city` values with "Unknown"
+    - Removes rows with missing `sale_price`
+    - Replaces missing `sale_date` with "2023-01-01"
+    - Fills missing `months_listed` and `bedrooms` with their respective means
+    - Replaces missing `house_type` with the mode 
+- Standardizes `house_type` abbreviations (e.g., "Det." to "Detached").
+- Removes units from the `area` column and converts it to a float.
+- Converts `sale_date` to a datetime object and extracts numerical features (year, month, day).
+
+## Feature Engineering
+
+- The `sale_date` column is split into `sale_year`, `sale_month`, and `sale_day` for potential use in the models. 
+
+## Model Building and Evaluation
+
+- **Model 1 (Linear Regression):** 
+    - Features: `bedrooms`, `area`, `months_listed`
+- **Model 2 (Decision Tree Regressor):**
+    - Features: All features, including one-hot encoded `city` and `house_type` 
+
+- The models are trained on a training set and evaluated on a separate validation set (80/20 split). 
+
+## Code Structure
+
+- **`clean_data(df)`:**  Cleans and preprocesses the input DataFrame.
+- **`model_1()`:**  Trains and evaluates the Linear Regression model.
+- **`model_2()`:**  Trains and evaluates the Decision Tree Regressor model.
+
+## How to Use
+
+1. **Place the `house_sales.csv` file in the project directory.**
+2. **Run the Python script.**
+
+## Future Work
+
+- Explore more feature engineering techniques (e.g., polynomial features, interactions).
+- Hyperparameter tune the models to improve performance.
+- Evaluate different regression models (e.g., Random Forest, Gradient Boosting).
